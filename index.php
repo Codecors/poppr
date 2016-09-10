@@ -1,93 +1,44 @@
-<!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="UTF-8">
-    <title>Indori Food Hipster</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+<?php 
+include("class.ipdetails.php"); 
+$ip=$_SERVER['REMOTE_ADDR']; 
+if($ip=="127.0.0.1"){$ip="66.84.41.158";} 
+$myip=new ipdetails($ip); 
+$myip->scan(); 
 
-    <link rel="stylesheet" href="../css/style.css">
-    <?php
-     include_once '../include.php';
-      session_start();
-      $user_check = $_SESSION['luser'];
-      if (isset($_SESSION['luser'])) {
-        $sql="SELECT * FROM register";
-        $result=mysqli_query($conn,$sql);
-        $row=mysqli_fetch_assoc($result);
-        if (mysqli_num_rows($result) > 0) {
-          $name = $row['name'];
-          $email= $row['email'];
-          $id = $row['id'];
-          $website = $row['website'];
-          $password = $row['password'];
-          
-      } else {
-        header('Location: ../login/');
-      }
-    }
-      
-    ?>
-    
-  <!-- Material Design Lite -->
-  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
-  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
-  <!-- Material Design icon font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</head>
-<body>
+$CountryCode=$myip->get_countrycode(); 
+$Code3=$myip->get_code3(); 
+$Country=$myip->get_country(); 
+$Region=$myip->get_region(); 
+$City=$myip->get_city(); 
+$PostalCode=$myip->get_postalcode(); 
+$Latitude=$myip->get_latitude(); 
+$Longitude=$myip->get_longitude(); 
+$DMAcode=$myip->get_dmacode(); 
+$Areacode=$myip->get_areacode(); 
 
-  <!-- Always shows a header, even in smaller screens. -->
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <!-- Title -->
-        <span class="mdl-layout-title">Dashboard</span>
-        <!-- Add spacer, to align navigation to the right -->
-        <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        
-      </div>
-    </header>
-    <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Dashboard</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Orders</a>
-        <a class="mdl-navigation__link" href="price.php">Prices</a>
-        <a class="mdl-navigation__link" href="">Details</a>
-      </nav>
-    </div>
-    <main class="mdl-layout__content">
-      <div class="page-content">
-        <div class="wrap">
-    <div class="col-md-8">
-      <form action="../admin/paste.php" method="post"> 
-        <div class="materialtext">
-          <input type="text" name="title" placeholder="Name" required>
-            <hr><br>
-            <label>Modal Title</label></div><br>
-            <div class="materialtext">
-            <textarea type="text" name="content" row="10" placeholder="You can put HTML, CSS also" required></textarea>
-            <hr><br>
-            <label>Modal Content</label></div><br>
-            <div class="materialtext">
-            <input type="text" name="bname" placeholder="Name" required>
-            <hr><br>  
-            <label>Modal Button Name</label></div><br>
-          <br><button type="submit" value="submit" class="btn-send">Submit</button>
-                </form> 
-        </div>
-    </div>
+$myip->close(); 
 
- </div>
-    </main>
-  </div>  </div>
-    
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
-<script src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
+?> 
 
-        <script src="../js/index.js"></script>
+<html> 
+<head><title>IP Details/Location Example</title></head> 
+<body> 
+<center> 
+<br /><br /> 
+<h3><?php echo $ip; ?> Details : </h3><br><br> 
+<table> 
+<tr><td><b>CountryCode</b></td><td>:</td><td><?php echo $CountryCode ; ?></td></tr> 
+<tr><td><b>Code3</b></td><td>:</td><td><?php echo $Code3; ?></td></tr> 
+<tr><td><b>Country</b></td><td>:</td><td><?php echo $Country; ?></td></tr> 
+<tr><td><b>Region</b></td><td>:</td><td><?php echo $Region; ?></td></tr> 
+<tr><td><b>City</b></td><td>:</td><td><?php echo $City; ?></td></tr> 
+<tr><td><b>PostalCode</b></td><td>:</td><td><?php echo $PostalCode; ?></td></tr> 
+<tr><td><b>Latitude</b></td><td>:</td><td><?php echo $Latitude; ?></td></tr> 
+<tr><td><b>Longitude</b></td><td>:</td><td><?php echo $Longitude; ?></td></tr> 
+<tr><td><b>DMAcode</b></td><td>:</td><td><?php echo $DMAcode; ?></td></tr> 
+<tr><td><b>Areacode</b></td><td>:</td><td><?php echo $Areacode; ?></td></tr> 
 
-  </body>
-</html>
+</table> 
+</center> 
+</body> 
+</html> 
